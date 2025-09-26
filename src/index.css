@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modern News App Design System */
+
+@layer base {
+  :root {
+    /* Core Brand Colors */
+    --primary: 220 90% 56%;
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 220 90% 46%;
+    
+    /* News App Specific Colors */
+    --news-primary: 220 90% 56%;
+    --news-accent: 280 100% 70%;
+    --news-success: 142 76% 36%;
+    --news-warning: 38 92% 50%;
+    --news-danger: 0 84% 60%;
+    
+    /* Backgrounds */
+    --background: 0 0% 100%;
+    --background-secondary: 220 14% 96%;
+    --foreground: 222 84% 5%;
+    
+    /* Surface Colors */
+    --card: 0 0% 100%;
+    --card-foreground: 222 84% 5%;
+    --card-hover: 220 14% 98%;
+    
+    /* Interactive Elements */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 222 47% 11%;
+    
+    /* Borders & Inputs */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 220 90% 56%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(220 90% 56%) 0%, hsl(280 100% 70%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(220 14% 96%) 0%, hsl(0 0% 100%) 100%);
+    --gradient-news: linear-gradient(180deg, hsl(220 90% 56% / 0.1) 0%, transparent 100%);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(220 90% 56% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(220 90% 56% / 0.1), 0 2px 4px -2px hsl(220 90% 56% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(220 90% 56% / 0.1), 0 4px 6px -4px hsl(220 90% 56% / 0.1);
+    --shadow-news: 0 4px 12px hsl(220 90% 56% / 0.15);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Layout */
+    --radius: 0.75rem;
+    --radius-sm: 0.5rem;
+    --radius-lg: 1rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Core Brand Colors - Dark Mode */
+    --primary: 220 90% 66%;
+    --primary-foreground: 222 84% 5%;
+    --primary-dark: 220 90% 56%;
+    
+    /* News App Specific Colors - Dark Mode */
+    --news-primary: 220 90% 66%;
+    --news-accent: 280 100% 80%;
+    --news-success: 142 76% 46%;
+    --news-warning: 38 92% 60%;
+    --news-danger: 0 84% 70%;
+    
+    /* Backgrounds - Dark Mode */
+    --background: 222 84% 5%;
+    --background-secondary: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    
+    /* Surface Colors - Dark Mode */
+    --card: 222 84% 5%;
+    --card-foreground: 210 40% 98%;
+    --card-hover: 222 47% 11%;
+    
+    /* Interactive Elements - Dark Mode */
+    --secondary: 217 33% 18%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 18%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 217 33% 18%;
+    --accent-foreground: 210 40% 98%;
+    
+    /* Borders & Inputs - Dark Mode */
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 220 90% 66%;
+    
+    /* Gradients - Dark Mode */
+    --gradient-primary: linear-gradient(135deg, hsl(220 90% 66%) 0%, hsl(280 100% 80%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(222 84% 5%) 100%);
+    --gradient-news: linear-gradient(180deg, hsl(220 90% 66% / 0.1) 0%, transparent 100%);
+    
+    /* Shadows - Dark Mode */
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.1);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.2), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.3), 0 4px 6px -4px hsl(0 0% 0% / 0.2);
+    --shadow-news: 0 4px 12px hsl(0 0% 0% / 0.25);
+
+    /* Destructive */
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .news-card {
+    @apply bg-card rounded-[var(--radius-lg)] border border-border shadow-[var(--shadow-md)] 
+           hover:shadow-[var(--shadow-lg)] transition-[var(--transition-smooth)]
+           hover:bg-card-hover;
+  }
+
+  .news-gradient {
+    background: var(--gradient-news);
+  }
+
+  .primary-gradient {
+    background: var(--gradient-primary);
+  }
+
+  .glass-effect {
+    @apply bg-background/80 backdrop-blur-md border border-border/50;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
