@@ -1,8 +1,11 @@
-# Urplug - Trading News App
+# Urplug - News App
 
 ## Project info
 
 A modern trading news application built with React, TypeScript, and Tailwind CSS.
+Some current screenshot
+<img width="1916" height="956" alt="image" src="https://github.com/user-attachments/assets/d878c8b8-9048-43f1-bbaf-d51006095216" />
+
 
 ## How can I edit this code?
 
