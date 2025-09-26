@@ -7,6 +7,11 @@ Some current screenshot
 <img width="1916" height="956" alt="image" src="https://github.com/user-attachments/assets/d878c8b8-9048-43f1-bbaf-d51006095216" />
 
 <img width="1916" height="936" alt="image" src="https://github.com/user-attachments/assets/c6137749-11e3-448e-85d1-cf8fc0b62ec4" />
+<img width="1920" height="847" alt="image" src="https://github.com/user-attachments/assets/7239cacd-18ac-4a97-8223-7023662d5dda" />
+
+<img width="1916" height="903" alt="image" src="https://github.com/user-attachments/assets/bd87e3a9-0d39-41c5-83d8-5c78894f623e" />
+
+
 
 
 
