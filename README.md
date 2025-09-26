@@ -6,6 +6,9 @@ A modern trading news application built with React, TypeScript, and Tailwind CSS
 Some current screenshot
 <img width="1916" height="956" alt="image" src="https://github.com/user-attachments/assets/d878c8b8-9048-43f1-bbaf-d51006095216" />
 
+<img width="1916" height="936" alt="image" src="https://github.com/user-attachments/assets/c6137749-11e3-448e-85d1-cf8fc0b62ec4" />
+
+
 
 ## How can I edit this code?
 
