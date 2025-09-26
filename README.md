@@ -72,4 +72,16 @@ You can deploy this project using various hosting platforms:
 npm run build
 ```
 
+Export to Github: Click the "Export to Github" button and git pull the project to your local machine
+Install dependencies: Run npm install
+Add platforms: Run npx cap add ios and/or npx cap add android
+Update platforms: Run npx cap update ios or npx cap update android
+Build project: Run npm run build
+Sync to native: Run npx cap sync
+Run on device: Run npx cap run android or npx cap run ios
+Requirements:
+
+For iOS: Mac with Xcode installed
+For Android: Android Studio installed
+
 This will create a `dist` folder with the production build that you can deploy to any static hosting service.
