@@ -1,42 +1,87 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { BottomNavigation } from "@/components/layout/BottomNavigation";
-import { NewsCard, NewsArticle } from "@/components/news/NewsCard";
+import { NewsCard } from "@/components/news/NewsCard";
 import { CategoryFilter } from "@/components/news/CategoryFilter";
-import { mockNewsData, getNewsByCategory, searchNews } from "@/data/mockNews";
 import { Button } from "@/components/ui/button";
-import { RefreshCw } from "lucide-react";
+import { RefreshCw, Search } from "lucide-react";
+import { fetchNews, Article } from "@/lib/api/newsApi";
+
+// Available news categories from NewsAPI
+const CATEGORIES = [
+  'all', 'business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology'
+];
 
 export const Home = () => {
-  const [articles, setArticles] = useState<NewsArticle[]>(mockNewsData);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
+  // Fetch news on component mount and when category changes
   useEffect(() => {
-    // Filter articles based on category and search
-    let filtered = searchQuery 
-      ? searchNews(searchQuery)
-      : getNewsByCategory(selectedCategory);
+    const loadNews = async () => {
+      try {
+        setIsLoading(true);
+        const data = await fetchNews(searchQuery, selectedCategory === 'all' ? '' : selectedCategory);
+        setArticles(data);
+        setFilteredArticles(data);
+      } catch (err) {
+        setError('Failed to load news. Please try again later.');
+        console.error('Error fetching news:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadNews();
+  }, [selectedCategory]);
+
+  // Filter articles based on search query
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setFilteredArticles(articles);
+      return;
+    }
+
+    const query = searchQuery.toLowerCase();
+    const filtered = articles.filter(
+      article => 
+        article.title?.toLowerCase().includes(query) ||
+        article.description?.toLowerCase().includes(query) ||
+        article.content?.toLowerCase().includes(query)
+    );
     
-    setArticles(filtered);
-  }, [selectedCategory, searchQuery]);
+    setFilteredArticles(filtered);
+  }, [searchQuery, articles]);
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    setSearchQuery(""); // Clear search when changing category
+    setSearchQuery("");
   };
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-    setSelectedCategory("All"); // Reset category when searching
+    if (query) {
+      setSelectedCategory('all');
+    }
   };
 
   const handleRefresh = async () => {
-    setIsRefreshing(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setIsRefreshing(false);
+    try {
+      setIsLoading(true);
+      const data = await fetchNews(searchQuery, selectedCategory === 'all' ? '' : selectedCategory);
+      setArticles(data);
+      setFilteredArticles(data);
+    } catch (err) {
+      setError('Failed to refresh news. Please try again.');
+      console.error('Error refreshing news:', err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleToggleFavorite = (id: string) => {
@@ -44,8 +89,7 @@ export const Home = () => {
     console.log("Toggle favorite for article:", id);
   };
 
-  const handleReadMore = (article: NewsArticle) => {
-    // In a real app, this would navigate to article detail page or open in-app browser
+  const handleReadMore = (article: Article) => {
     window.open(article.url, '_blank');
   };
 
@@ -95,14 +139,30 @@ export const Home = () => {
         <div className="container mx-auto px-4">
           {articles.length > 0 ? (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {articles.map((article) => (
-                <NewsCard
-                  key={article.id}
-                  article={article}
-                  onToggleFavorite={handleToggleFavorite}
-                  onReadMore={handleReadMore}
-                />
-              ))}
+              {filteredArticles.map((article, index) => {
+                // Map the API response to match our NewsArticle interface
+                const mappedArticle = {
+                  id: article.url, // Use URL as unique ID
+                  title: article.title || 'No title',
+                  description: article.description || '',
+                  content: article.content || '',
+                  imageUrl: article.urlToImage || undefined,
+                  category: selectedCategory,
+                  publishedAt: article.publishedAt,
+                  source: article.source?.name || 'Unknown Source',
+                  url: article.url,
+                  isFavorite: false
+                };
+                
+                return (
+                  <NewsCard
+                    key={`${article.source?.id || 'source'}-${index}`}
+                    article={mappedArticle}
+                    onToggleFavorite={() => handleToggleFavorite(article.url)}
+                    onReadMore={() => handleReadMore(article)}
+                  />
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-12">

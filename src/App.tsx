@@ -7,6 +7,7 @@ import { Home } from "./pages/Home";
 import { Categories } from "./pages/Categories";
 import { Favorites } from "./pages/Favorites";
 import { Profile } from "./pages/Profile";
+import NewsFeed from "@/components/NewsFeed";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/categories" element={<Categories />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/news" element={<NewsFeed />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
