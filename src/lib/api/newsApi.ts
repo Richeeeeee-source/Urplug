@@ -1,5 +1,9 @@
 const API_KEY = '62473925f16d4bda89289e8080f80b5a';
-const BASE_URL = 'https://newsapi.org/v2';
+const IS_PRODUCTION = import.meta.env.PROD;
+const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+const BASE_URL = IS_PRODUCTION 
+  ? `${CORS_PROXY}${encodeURIComponent('https://newsapi.org/v2')}`
+  : 'https://newsapi.org/v2';
 
 // For development: Mock data when API fails
 const MOCK_ARTICLES = [
@@ -97,33 +101,47 @@ export async function fetchNews(query: string = '', category: string = ''): Prom
       params.append('category', category);
     }
 
-    const url = `${BASE_URL}${endpoint}?${params.toString()}`;
+    // Build the URL for the actual NewsAPI
+    const apiUrl = `https://newsapi.org/v2${endpoint}?${params.toString()}`;
+    // Use the CORS proxy in production
+    const url = IS_PRODUCTION 
+      ? `${CORS_PROXY}${encodeURIComponent(apiUrl)}`
+      : apiUrl;
+      
     console.log('Fetching news from:', url);
     
-    const response = await fetch(url, {
-      headers: {
-        'Accept': 'application/json',
-      },
-    });
-
+    const headers = IS_PRODUCTION
+      ? { 'Accept': 'application/json' }
+      : { 
+          'Accept': 'application/json',
+          'X-Api-Key': API_KEY
+        };
+    
+    const response = await fetch(url, { headers });
+    
     if (!response.ok) {
-      const error = await response.json();
+      const error = await response.text();
       console.error('NewsAPI Error:', error);
-      throw new Error(error.message || 'Failed to fetch news');
+      throw new Error('Failed to fetch news. Please try again later.');
     }
 
-    const data: NewsApiResponse = await response.json();
-    
-    if (!data.articles || data.articles.length === 0) {
-      console.warn('No articles found for query:', { query, category });
-      // Return mock data with category information for development
-      return MOCK_ARTICLES.map(article => ({
-        ...article,
-        title: `${category && category !== 'all' ? category.charAt(0).toUpperCase() + category.slice(1) + ' ' : ''}${article.title}`,
-      }));
+    try {
+      const data: NewsApiResponse = await response.json();
+      
+      if (!data.articles || data.articles.length === 0) {
+        console.warn('No articles found for query:', { query, category });
+        // Return mock data with category information for development
+        return MOCK_ARTICLES.map(article => ({
+          ...article,
+          title: `${category && category !== 'all' ? category.charAt(0).toUpperCase() + category.slice(1) + ' ' : ''}${article.title}`,
+        }));
+      }
+      
+      return data.articles;
+    } catch (error) {
+      console.error('Error parsing response:', error);
+      throw new Error('Error processing news data');
     }
-    
-    return data.articles;
   } catch (error) {
     console.error('Error fetching news:', error);
     
