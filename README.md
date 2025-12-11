@@ -4,12 +4,13 @@
 
 A modern trading news application built with React, TypeScript, and Tailwind CSS.
 Some current screenshot
-<img width="1916" height="956" alt="image" src="https://github.com/user-attachments/assets/d878c8b8-9048-43f1-bbaf-d51006095216" />
+<img width="1916" height="966" alt="image" src="https://github.com/user-attachments/assets/1996ceb0-a8dc-431a-82a2-dad2b677f6b7" />
+<img width="1918" height="947" alt="image" src="https://github.com/user-attachments/assets/8f3c51c2-f3e9-48a6-afdb-316ed40e99b8" />
+<img width="1910" height="883" alt="image" src="https://github.com/user-attachments/assets/4db4162b-3d87-4a9b-95c6-94d5bdae86db" />
+<img width="1893" height="953" alt="image" src="https://github.com/user-attachments/assets/3053e385-ae72-4953-9ca4-3146c7098fc7" />
+<img width="1909" height="951" alt="image" src="https://github.com/user-attachments/assets/f1b4d707-4f12-4b87-a30b-40a863edc5b3" />
 
-<img width="1916" height="936" alt="image" src="https://github.com/user-attachments/assets/c6137749-11e3-448e-85d1-cf8fc0b62ec4" />
-<img width="1920" height="847" alt="image" src="https://github.com/user-attachments/assets/7239cacd-18ac-4a97-8223-7023662d5dda" />
 
-<img width="1916" height="903" alt="image" src="https://github.com/user-attachments/assets/bd87e3a9-0d39-41c5-83d8-5c78894f623e" />
 
 
 
